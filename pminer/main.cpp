@@ -499,6 +499,10 @@ class MinerCLI {
 
                 "Use syslog appropriate output (drop timestamp "
                 "and channel prefix)")
+            
+            ("algo", value<string>()->default_value("ethash")->notifier(on_algo),
+
+                "Set the algo name. Only support 2 algorithm right now : 'ethash, etchash' ")
 
 #if ETH_ETHASHCL || ETH_ETHASHCUDA || ETH_ETHASH_CPU
 
@@ -524,10 +528,6 @@ class MinerCLI {
                 "Hex string specifying the upper bits of miner's "
                 "start nonce. Can be used to ensure multiple miners "
                 "are not searching overlapping nonce ranges.")
-
-            ("algo", value<string>()->default_value("")->notifier(on_algo),
-
-                "Set the algo name. Only support 2 algorithm right now : 'ethash, etchash' ")
 
             ("devices", value<vector<unsigned>>()->multitoken(),
 
@@ -820,7 +820,6 @@ class MinerCLI {
 
         m_FarmSettings.hwMon = vm["HWMON"].as<unsigned>();
         m_FarmSettings.nonce = vm["nonce"].as<string>();
-        m_FarmSettings.cuAlgo = vm["algo"].as<string>();
 
 #if ETH_ETHASHCUDA
         m_FarmSettings.cuBlockSize = vm["cu-block"].as<unsigned>();
@@ -835,6 +834,7 @@ class MinerCLI {
 
         m_FarmSettings.tempStop = vm["tstop"].as<unsigned>();
         m_FarmSettings.tempStart = vm["tstart"].as<unsigned>();
+        m_FarmSettings.cuAlgo = vm["algo"].as<string>();
 
         cl_miner = vm.count("opencl");
         cuda_miner = vm.count("cuda");

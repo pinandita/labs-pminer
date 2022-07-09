@@ -5,9 +5,9 @@
 
 > Ethereum (ethash) & Ethereum Classic (etchash) miner with OpenCL, CUDA and stratum support
 
-**pminer** is an Ethash and Etchash GPU mining application: with nsfminer you can mine every coin which relies on an Ethash & Etchash Proof of Work.
+**pminer** is an Ethash and Etchash GPU mining application: with pminer you can mine every coin which relies on an Ethash & Etchash Proof of Work.
 
-This is a direct descendent of the Ethminer project at https://github.com/ethereum-mining/ethminer. Since that project
+This is a direct descendent of the Ethminer project at https://github.com/no-fee-ethereum-mining/nsfminer. Since that project
 is largely abandoned and unmanaged this personal version is published with the hope that it may continue to be useful. In the spirit
 of open source problem reports and pull requests are welcome, but please use git-clang-format on your requests.
 
@@ -68,4 +68,4 @@ To meet the community, ask general questions and chat about the miner join [the 
 
 Licensed under the [GNU General Public License, Version 3](LICENSE).
 
-[Gitter]: https://gitter.im/nofee-pminer
+[Gitter]: https://gitter.im/labs-pminer/labs-pminer
