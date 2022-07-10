@@ -1,6 +1,6 @@
 # pminer - No Fee Miner For ETHASH & ETCHASH
 
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg)](https://github.com/RichardLitt/standard-readme)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg)](https://github.com/RichardLitt/standard-readme) [![Join the chat at https://gitter.im/labs-pminer/labs-pminer](https://badges.gitter.im/labs-pminer/labs-pminer.svg)](https://gitter.im/labs-pminer/labs-pminer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)][Gitter]
 
 > Ethereum (ethash) & Ethereum Classic (etchash) miner with OpenCL, CUDA and stratum support
