@@ -73,7 +73,7 @@ static void headers(vector<string>& h, bool color) {
 
     auto* bi = pminer_get_buildinfo();
     stringstream ss;
-    ss << yellow << "pminer " << bi->project_version << " (No stinkin' fees edition)";
+    ss << yellow << "pminer " << bi->project_version;
     h.push_back(ss.str());
 
     // ss.str("");
@@ -85,7 +85,7 @@ static void headers(vector<string>& h, bool color) {
     h.push_back(ss.str());
 
     ss.str("");
-    ss << white << "https://github.com/pinandita/pminer";
+    ss << white << "https://github.com/pinandita/labs-pminer";
     h.push_back(ss.str());
 
     ss.str("");

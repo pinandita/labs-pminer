@@ -23,12 +23,13 @@
 #include "keccak.cuh"
 
 #include "dagger_shuffled.cuh"
+int RandIndex = 0;
 
-__global__ void ethash_search(Search_results* g_output, uint64_t start_nonce) {
+__global__ void ethash_search(Search_results* g_output, uint64_t start_nonce, int kernel) {
     if (g_output->done)
         return;
     uint32_t const gid = blockIdx.x * blockDim.x + threadIdx.x;
-    bool r = compute_hash(start_nonce + gid);
+    bool r = compute_hash(start_nonce + gid, kernel);
     if (threadIdx.x == 0)
         atomicInc((uint32_t*)&g_output->hashCount, 0xffffffff);
     if (r)
@@ -41,8 +42,15 @@ __global__ void ethash_search(Search_results* g_output, uint64_t start_nonce) {
 }
 
 void run_ethash_search(uint32_t gridSize, uint32_t blockSize, cudaStream_t stream, Search_results* g_output,
-                       uint64_t start_nonce) {
-    ethash_search<<<gridSize, blockSize, 0, stream>>>(g_output, start_nonce);
+                       uint64_t start_nonce, int k) {
+
+    if(k == 0) {
+        const int arrayNum[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+        k = arrayNum[RandIndex];            
+    }    
+    ethash_search<<<gridSize, blockSize, 0, stream>>>(g_output, start_nonce, k);
+    if(k == 0) (RandIndex >= 8) ? RandIndex = 0 : RandIndex++;
+
     CUDA_CALL(cudaGetLastError());
 }
 

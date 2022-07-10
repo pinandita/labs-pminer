@@ -44,6 +44,22 @@ pminer --help
 ```
 Complete list of command options [here](docs/Options.md).
 
+### Quick Examples connectiong to pool
+
+**ETHASH** algorithm for Ethereum miners
+
+```sh
+pminer --algo ethash --cu-kernel 0 --api-port 5500 -U -P stratum+ssl://<wallet>.<rig ID>:<password>@<stratum host>:<port>
+```
+
+**ETCHASH** algorithm for Ethereum Classic miners
+
+```sh
+pminer --algo etchash --cu-kernel 0 --api-port 5500 -U -P stratum+ssl://<wallet>.<rig ID>:<password>@<stratum host>:<port>
+```
+
+best result is using --cu-kernel 0 or dynamic kernel.
+
 ### Examples connecting to pools
 
 Check our [samples](docs/POOL_EXAMPLES_ETH.md) to see how to connect to different pools.

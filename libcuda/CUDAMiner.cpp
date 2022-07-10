@@ -148,6 +148,15 @@ bool CUDAMiner::initEpoch() {
             m_epochContext.dagSize,
             uint32_t(chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - startInit).count()),
             true);
+
+        if(m_deviceDescriptor.cuKernel == 0) {
+            m_deviceDescriptor.cuKernel = 0;            
+            cextr << EthYellow << "Using Kernel: " << m_deviceDescriptor.cuKernel << " (dynamic)";
+        } else {
+            //m_deviceDescriptor.cuKernel = getKernel(m_deviceDescriptor.cuCores);            
+            cextr << EthYellow << "Using Kernel: " << m_deviceDescriptor.cuKernel;
+        }        
+
     } catch (const cuda_runtime_error& ec) {
         cnote << "Unexpected error " << ec.what() << " on CUDA device " << m_deviceDescriptor.uniqueId;
         cnote << "Mining suspended ...";
@@ -317,7 +326,7 @@ void CUDAMiner::search(uint8_t const* header, uint64_t target, uint64_t start_no
         HostToDevice(m_search_buf[streamIdx], zero3, sizeof(zero3), m_streams[streamIdx]);
         m_hung_miner.store(false);
         run_ethash_search(m_block_multiple, m_deviceDescriptor.cuBlockSize, m_streams[streamIdx],
-                          m_search_buf[streamIdx], start_nonce);
+                          m_search_buf[streamIdx], start_nonce, m_deviceDescriptor.cuKernel);
     }
     m_done = false;
     m_doneMutex.unlock();
@@ -359,7 +368,7 @@ void CUDAMiner::search(uint8_t const* header, uint64_t target, uint64_t start_no
             else {
                 m_hung_miner.store(false);
                 run_ethash_search(m_block_multiple, m_deviceDescriptor.cuBlockSize, stream, (Search_results*)buffer,
-                                  start_nonce);
+                                  start_nonce, m_deviceDescriptor.cuKernel);
             }
 
             if (r.solCount > MAX_SEARCH_RESULTS)
